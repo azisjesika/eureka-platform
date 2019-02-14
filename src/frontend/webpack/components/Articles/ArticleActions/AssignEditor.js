@@ -13,7 +13,7 @@ import {
 import {isGanache} from '../../../../../helpers/isGanache.mjs';
 import toast from '../../../design-components/Notification/Toast.js';
 import ActionButton from './ActionButton.js';
-import {__ALERT_SUCCESS, __FIFTH} from '../../../../helpers/colors.js';
+import {__FIFTH} from '../../../../helpers/colors.js';
 import {ASSIGN_ARTICLE} from './ButtonsNaming.js';
 
 export const assignEditor = async (web3Context, props) => {
@@ -53,7 +53,7 @@ export const assignEditor = async (web3Context, props) => {
           text={`The article has been successfully assigned to yourself`}
         />
       );
-      props.fetchingArticleData(props.article._id);
+      callback();
     })
     .catch(err => {
       toast.error(err.toLocaleString(), {autoClose: false});
@@ -85,14 +85,14 @@ export const AssignAsEditorButton = connect(
             dataTip={'assignEditor'}
             icon={'editorAssign'}
             background={__FIFTH}
-            onClick={async () => {
-              await assignEditor(web3Context, props);
+            onClick={() => {
+              assignEditor(web3Context, props, () => {
+                props.fetchingArticleData(props.article._id);
+              });
             }}
-            title={
-              'Assign yourself as a handling editor to supervise this submission process.'
-            }
+            title={ASSIGN_ARTICLE.tooltip}
           >
-            {ASSIGN_ARTICLE}
+            {ASSIGN_ARTICLE.label}
           </ActionButton>
         );
       }}
