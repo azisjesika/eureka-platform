@@ -16,7 +16,7 @@ import ActionButton from './ActionButton.js';
 import {__FIFTH} from '../../../../helpers/colors.js';
 import {ASSIGN_ARTICLE} from './ButtonsNaming.js';
 
-export const assignEditor = async (web3Context, props) => {
+export const assignEditor = async (web3Context, props, callback) => {
   let gasAmount;
   // gas estimation on ganache doesn't work properly
   if (!isGanache(web3Context.web3))
