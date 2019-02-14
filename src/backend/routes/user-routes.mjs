@@ -7,7 +7,6 @@ import Roles from '../schema/roles-enum.mjs';
 
 const router = express.Router();
 
-// router.use(accesController.loggedInOnly);
 router.get(
   '/',
   asyncHandler(async req => {
@@ -16,6 +15,12 @@ router.get(
         req.query.email,
         req.query.roles
       );
+    }
+    const role = req.body.role;
+    if (role !== Roles.CONTRACT_OWNER && role !== Roles.ADMIN) {
+      let error = new Error('No authorization for role:' + role);
+      error.status = 400;
+      throw error;
     }
     if (req.query.ethAddress) {
       const query = req.query.ethAddress;

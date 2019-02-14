@@ -41,8 +41,8 @@ export default {
       parseInt(null)
     );
 
-    // TODO: change the limit of showed article in prod
-    const limit = "10";
+
+    const limit = '10';
     let carousel = await getLimitedObjects(
       articleVersionService.getArticlesOpenForCommunityReviews(
         userAddress,
@@ -120,7 +120,7 @@ export default {
           {
             title: 'ArticlesToReview',
             subTitle: 'Open Articles to review',
-            text: 'articles are available for review for you.',
+            text: 'articles are available for review.',
             total: totalOpenArticles,
             icon: 'openForReview',
             content: carousel,
